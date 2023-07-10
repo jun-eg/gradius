@@ -3,9 +3,9 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { gaPageview } from 'src/utils/gtag';
-import '../styles/globals.css';
 import { AuthLoader } from './@components/AuthLoader';
 import { useLoading } from './@hooks/useLoading';
+import './styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const SafeHydrate = dynamic(() => import('../components/SafeHydrate'), { ssr: false });
