@@ -65,39 +65,37 @@ const Home = () => {
   if (!user) return <Loading visible />;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.up_down_button_board}>
-        <div
-          className={styles.up_button}
-          onClick={() => order_to_direction({ move: { x: 0, y: -1 } })}
-        >
-          上
+    <div className={styles.clip_path_shadow}>
+      <div className={styles.container}>
+        <div className={styles.up_down_button_board}>
+          <div className={styles.up_button} onClick={() => order_to_direction('up')}>
+            上
+          </div>
+          <div className={styles.down_button} onClick={() => order_to_direction('down')}>
+            下
+          </div>
         </div>
-        <div
-          className={styles.down_button}
-          onClick={() => order_to_direction({ move: { x: 0, y: 1 } })}
-        >
-          下
+        <div className={styles.upleft_upright_board}>
+          <div className={styles.upleft_button}>左上</div>
+          <div className={styles.upright_button}>右上</div>
         </div>
-      </div>
-      <div className={styles.left_right_button_board}>
-        <div
-          className={styles.left_button}
-          onClick={() => order_to_direction({ move: { x: -1, y: 0 } })}
-        >
-          左
+        <div className={styles.downleft_downright_board}>
+          <div className={styles.downleft_button}>左下</div>
+          <div className={styles.downright_button}>右下</div>
         </div>
-        <div
-          className={styles.right_button}
-          onClick={() => order_to_direction({ move: { x: 1, y: 0 } })}
-        >
-          右
-        </div>
-        <div className={styles.start_button} onClick={() => change_game_state(change_count)}>
-          {game_state_list[change_count]}
-        </div>
-        <div className={styles.shoot_button} onClick={() => order_to_shoot()}>
-          発射
+        <div className={styles.left_right_button_board}>
+          <div className={styles.left_button} onClick={() => order_to_direction('left')}>
+            左
+          </div>
+          <div className={styles.right_button} onClick={() => order_to_direction('right')}>
+            右
+          </div>
+          <div className={styles.start_button} onClick={() => change_game_state(change_count)}>
+            {game_state_list[change_count]}
+          </div>
+          <div className={styles.shoot_button} onClick={() => order_to_shoot()}>
+            発射
+          </div>
         </div>
       </div>
     </div>

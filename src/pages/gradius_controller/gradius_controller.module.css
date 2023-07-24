@@ -14,9 +14,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transform: translateX(50%);
 }
 
 .left_right_button_board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-68.6%);
+}
+
+.upleft_upright_button_board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.downleft_downright_button_board {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,45 +39,106 @@
 .up_button {
   font-size: 20px;
   color: black;
-  width: 50px;
-  height: 50px;
-  background-color: red;
+  width: 100px;
+  height: 150px;
+  background-color: royalblue;
+  box-shadow: inset;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateY(-1%);
+  clip-path: polygon(0 0, 100% 0%, 100% 67%, 50% 100%, 0% 67%);
 }
 
 .down_button {
   font-size: 20px;
   color: black;
-  width: 50px;
-  height: 50px;
-  background-color: blue;
+  width: 100px;
+  height: 150px;
+  background-color: royalblue;
+  box-shadow: 4px 4px 8px black;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateY(1%);
+  clip-path: polygon(0 33%, 50% 0, 100% 33%, 100% 100%, 0 100%);
 }
 
+.upleft_button {
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-152px, -52px);
+  clip-path: circle(100% at 100% 100%);
+}
+
+.upright_button {
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(52px, -152px);
+  clip-path: circle(100% at 0 100%);
+}
+
+.downleft_button {
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-252px, 152px);
+  clip-path: circle(100% at 100% 0);
+}
+
+.downright_button {
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-48px, 52px);
+  clip-path: circle(100% at 0 0);
+}
 .left_button {
   font-size: 20px;
   color: black;
-  width: 50px;
-  height: 50px;
-  background-color: yellow;
+  width: 150px;
+  height: 100px;
+  background-color: royalblue;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateX(-2px);
+  clip-path: polygon(0 0, 67% 0, 100% 50%, 67% 100%, 0 100%);
 }
 
 .right_button {
   font-size: 20px;
   color: black;
-  width: 50px;
-  height: 50px;
-  background-color: green;
+  width: 150px;
+  height: 100px;
+  background-color: royalblue;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateX(2px);
+  clip-path: polygon(33% 0, 100% 0%, 100% 100%, 33% 100%, 0 50%);
 }
 
 .start_button {
@@ -80,10 +155,16 @@
 .shoot_button {
   font-size: 20px;
   color: black;
-  width: 110px;
-  height: 50px;
-  background-color: yellow;
+  width: 100px;
+  height: 100px;
+  background-color: red;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateX(100px);
+  clip-path: circle(50% at 50% 50%);
+}
+
+.clip_path_shadow {
+  filter: drop-shadow(5px 5px 3px rgb(48, 48, 48));
 }
