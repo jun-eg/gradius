@@ -14,14 +14,26 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform: translateX(50px);
+  transform: translateX(50%);
 }
 
 .left_right_button_board {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateX(-150px);
+  transform: translateX(-68.6%);
+}
+
+.upleft_upright_button_board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.downleft_downright_button_board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .up_button {
@@ -34,7 +46,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(-2px);
+  transform: translateY(-1%);
   clip-path: polygon(0 0, 100% 0%, 100% 67%, 50% 100%, 0% 67%);
 }
 
@@ -48,10 +60,61 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(2px);
+  transform: translateY(1%);
   clip-path: polygon(0 33%, 50% 0, 100% 33%, 100% 100%, 0 100%);
 }
 
+.upleft_button {
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-152px, -52px);
+  clip-path: circle(100% at 100% 100%);
+}
+
+.upright_button {
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(52px, -152px);
+  clip-path: circle(100% at 0 100%);
+}
+
+.downleft_button {
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-252px, 152px);
+  clip-path: circle(100% at 100% 0);
+}
+
+.downright_button {
+  font-size: 20px;
+  color: black;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-48px, 52px);
+  clip-path: circle(100% at 0 0);
+}
 .left_button {
   font-size: 20px;
   color: black;
@@ -102,6 +165,6 @@
   clip-path: circle(50% at 50% 50%);
 }
 
-.clip-path-shadow {
+.clip_path_shadow {
   filter: drop-shadow(5px 5px 3px rgb(48, 48, 48));
 }
