@@ -37,8 +37,9 @@ const Home = () => {
     //応急処置
     apiClient.controller1.laser_shot.$post({ body: [1] });
   }, []);
+  //wa-
 
-  // キーボード操作
+  // キーボード操作1
   useEffect(() => {
     // eslint-disable-next-line complexity
     window.addEventListener('keydown', (e) => {
