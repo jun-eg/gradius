@@ -1,9 +1,9 @@
-import { move_player } from '$/repository/Usecase/playerUsecase';
+import { playerUsecase } from '$/repository/Usecase/playerUsecase';
 import { defineController } from './$relay';
 
 export default defineController(() => ({
-  post: async ({ body }) => {
-    const result = await move_player.moveplayer(body);
+  post: async ({ user, body }) => {
+    const result = await playerUsecase.moveplayer(user.id, body);
     return {
       status: 202,
       body: result,

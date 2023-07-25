@@ -1,4 +1,5 @@
 //ここにゲーム画面をつくる
+import type { PlayerModel } from '$/commonTypesWithClient/models';
 import type { Enemy_Info } from '$/repository/Usecase/enemyUsecase';
 import type { Laser_Info } from '$/repository/Usecase/laserUsecase';
 import { useEffect, useRef, useState } from 'react';
@@ -10,7 +11,7 @@ import styles from './gradius_game_screen.module.css';
 // import fighter from '../../../public/images/fighter.png';
 
 const App = () => {
-  const [fight_position, setfight_position] = useState<number[]>();
+  const [fight_position, setfight_position] = useState<PlayerModel[]>();
   const [enemieies_info, setenemieies_info] = useState<Enemy_Info[]>([]);
   const [laseies_info, setlaseies_info] = useState<Laser_Info[]>([]);
   const [background_pos, setbackground_pos] = useState(0);
@@ -19,12 +20,16 @@ const App = () => {
   const enemyImgRef = useRef(new window.Image());
   enemyImgRef.current.src = '/images/enemy_spacecraft.png';
 
+  const fetchPlayers = async () => {
+    const res = await apiClient.player.$get();
+    if (res !== null) {
+      setfight_position(res);
+    }
+  };
+
   const fetchBord = async () => {
-    const new_fighter_position = await apiClient.player.$get();
     const new_enemies_info = await apiClient.enemy.$get();
     const new_laseies_info = await apiClient.laser.$get();
-
-    setfight_position(new_fighter_position);
     setenemieies_info(new_enemies_info);
     setlaseies_info(new_laseies_info);
     setbackground_pos((pre_background_pos) => pre_background_pos - 1);
@@ -32,6 +37,12 @@ const App = () => {
 
   useEffect(() => {
     const cancellid = setInterval(fetchBord, 10);
+    return () => {
+      clearInterval(cancellid);
+    };
+  }, []);
+  useEffect(() => {
+    const cancellid = setInterval(fetchPlayers, 10);
     return () => {
       clearInterval(cancellid);
     };
@@ -53,13 +64,24 @@ const App = () => {
       style={{ backgroundPosition: `${background_pos}px 0` }}
     >
       <Layer>
-        <Image
+        {/* <Image
           image={fighterImgRef.current}
           width={fighterImgRef.current.width}
           height={fighterImgRef.current.height}
-          x={fight_position[0] - fighterImgRef.current.width / 2}
-          y={fight_position[1] - fighterImgRef.current.height / 2}
-        />
+          x={}
+          y={fight_position[1]}
+        /> */}
+        {fight_position.map((fighter, index) => (
+          <Image
+            image={fighterImgRef.current}
+            width={fighter.size.width}
+            height={fighter.size.height}
+            key={index}
+            id={`fighter_${index}`}
+            x={fighter.position.x}
+            y={fighter.position.y}
+          />
+        ))}
       </Layer>
       <Layer>
         {enemieies_info.map((enemy, index) => (

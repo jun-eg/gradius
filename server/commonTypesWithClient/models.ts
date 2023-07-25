@@ -13,3 +13,14 @@ export type TaskModel = {
   done: boolean;
   created: number;
 };
+
+//まずは、playerだけ
+export type PlayerModel = {
+  id: UserId;
+  player_name: string;
+  position: { x: number; y: number };
+  speed: number;
+  hp: number;
+  scole: number;
+  size: { width: number; height: number };
+};

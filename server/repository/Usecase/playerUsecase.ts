@@ -1,4 +1,7 @@
-//これが必要かは微妙
+import type { UserId } from '$/commonTypesWithClient/branded';
+import type { PlayerModel } from '$/commonTypesWithClient/models';
+import { playersRepository } from '../playersRepository';
+
 export type MoveDirection = {
   move: { x: 1 | -1 | 0; y: 1 | -1 | 0 };
 };
@@ -31,6 +34,7 @@ const player_first_pos: number[] = [100, 300];
 const player_speed = 10;
 const player_hp = 100;
 const player_scole = 0;
+const player_size = { width: 200, height: 70 };
 
 export const player_info: Player_Info = {
   pos: { x: player_first_pos[0], y: player_first_pos[1] },
@@ -39,17 +43,60 @@ export const player_info: Player_Info = {
   scole: player_scole,
 };
 
-export const move_player = {
-  moveplayer: async (move_direction: MoveDirection) => {
-    player_info.pos = {
-      x: Math.min(
-        Math.max(player_info.pos.x + move_direction.move.x * player_info.speed, 0),
-        1800 - 250
-      ),
-      y: Math.min(
-        Math.max(player_info.pos.y + move_direction.move.y * player_info.speed, 0),
-        780 - 75
-      ),
+// export const move_player = {
+//   moveplayer: async (move_direction: MoveDirection) => {
+//     player_info.pos = {
+//       x: Math.min(
+//         Math.max(player_info.pos.x + move_direction.move.x * player_info.speed, 0),
+//         1800 - 250
+//       ),
+//       y: Math.min(
+//         Math.max(player_info.pos.y + move_direction.move.y * player_info.speed, 0),
+//         780 - 75
+//       ),
+//     };
+//   },
+// };
+
+export const playerUsecase = {
+  moveplayer: async (id: UserId, move_direction: MoveDirection): Promise<PlayerModel | null> => {
+    const player: PlayerModel | null = await playersRepository.getUnique(id);
+    if (player === null) return null;
+    const moved_player: PlayerModel = {
+      ...player,
+      position: {
+        x: Math.min(
+          Math.max(player.position.x + move_direction.move.x * player.speed, 0),
+          1800 - 250
+        ),
+        y: Math.min(
+          Math.max(player.position.y + move_direction.move.y * player.speed, 0),
+          780 - 75
+        ),
+      },
     };
+    await playersRepository.save(moved_player);
+    return moved_player;
+  },
+  get: async (userId: UserId, userName: string): Promise<PlayerModel[] | null> => {
+    const players: PlayerModel[] = (await playersRepository.getAll()) ?? [];
+    const isExist = players.some((player) => player.id === userId);
+    if (!isExist) {
+      const newPlayer: PlayerModel = {
+        id: userId,
+        player_name: userName,
+        position: {
+          x: player_first_pos[0],
+          y: player_first_pos[1],
+        },
+        speed: player_speed,
+        hp: player_hp,
+        scole: player_scole,
+        size: { width: player_size.width, height: player_size.height },
+      };
+      await playersRepository.save(newPlayer);
+      return await playersRepository.getAll();
+    }
+    return players;
   },
 };

@@ -1,13 +1,9 @@
-import { player_info } from '$/repository/Usecase/playerUsecase';
+import { playerUsecase } from '$/repository/Usecase/playerUsecase';
 import { defineController } from './$relay';
 
 export default defineController(() => ({
-  get: async () => {
-    //とりあえずposだけ
-    const player_ps = [player_info.pos.x, player_info.pos.y];
-    return {
-      status: 200,
-      body: player_ps,
-    };
-  },
+  get: async ({ user }) => ({
+    status: 200,
+    body: await playerUsecase.get(user.id, user.displayName ?? 'Player'),
+  }),
 }));
