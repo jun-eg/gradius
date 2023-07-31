@@ -23,14 +23,14 @@ const insertPlayerModel = (prisumaPlayer: Player): PlayerModel => ({
 
 export const playersRepository = {
   getAll: async (): Promise<PlayerModel[] | null> => {
-    const prisumaPlayer = await prismaClient.player.findMany();
-    return prisumaPlayer.map(insertPlayerModel);
+    const prisumaPlayerInfo = await prismaClient.player.findMany();
+    return prisumaPlayerInfo.map(insertPlayerModel);
   },
   getUnique: async (id: UserId): Promise<PlayerModel | null> => {
-    const prisumaPlayer = await prismaClient.player.findUnique({
+    const prisumaPlayerInfo = await prismaClient.player.findUnique({
       where: { id },
     });
-    return prisumaPlayer !== null ? insertPlayerModel(prisumaPlayer) : null;
+    return prisumaPlayerInfo !== null ? insertPlayerModel(prisumaPlayerInfo) : null;
   },
   save: async (player: PlayerModel) => {
     await prismaClient.player.upsert({
